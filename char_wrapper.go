@@ -48,7 +48,7 @@ func (cw *CharWrapper) Write(p []byte) (n int, err error) {
 
         fmt.Printf("%c %d, ", r, cw.currentColumn)
         if cw.currentColumn + runeWidth > cw.Width {
-            if cw.currentColumn != 0 {
+            if cw.currentColumn != 0 && r != '\n' {
                 cw.buf = append(cw.buf, '\n')
             }
 
