@@ -50,6 +50,8 @@ func (cw *CharWrapper) Write(p []byte) (n int, err error) {
         if cw.currentColumn + runeWidth > cw.Width {
             cw.buf = append(cw.buf, '\n')
             cw.currentColumn = runeWidth
+        } else if r == '\n'{
+            cw.currentColumn = 0
         } else {
             cw.currentColumn += runeWidth
         }
