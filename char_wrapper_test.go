@@ -7,7 +7,27 @@ import (
     "github.com/kuredoro/wwrap"
 )
 
-func TestTest(t *testing.T) {
+func TestCharWrapper(t *testing.T) {
+    t.Run("line that fits the width", func(t *testing.T) {
+        text := "あいうえお"
+
+        cw := &wwrap.CharWrapper{Width: 10}
+        wwrap.AssertWriteString(t, cw, text)
+
+        b, err := io.ReadAll(cw)
+        if err != nil {
+            t.Errorf("got error, want none. Error: %v", err)
+        }
+
+        want := "あいうえお"
+        got := string(b)
+
+        if got != want {
+            t.Errorf("got %q, want %q", got, want)
+        }
+    })
+
+    /*
     text := "今日はいい天気ですね。"
 
     cw := &wwrap.CharWrapper{Width: 10}
@@ -24,4 +44,5 @@ func TestTest(t *testing.T) {
     if got != want {
         t.Errorf("got %q, want %q", got, want)
     }
+    */
 }
