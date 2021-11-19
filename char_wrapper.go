@@ -2,7 +2,7 @@ package wwrap
 
 import (
 	"io"
-    //"fmt"
+    "fmt"
 	"unicode/utf8"
 )
 
@@ -42,17 +42,20 @@ func (cw *CharWrapper) Write(p []byte) (n int, err error) {
             break
         }
 
-        // We should add a newline only when current character exceeds the
-        // column width. If we put this if after incremental of currentColumn
-        // the newline will be printed even if the text fits Width perfectly.
-        if cw.currentColumn > cw.Width - 1 {
+        runeWidth := uint(2)
+
+        fmt.Printf("%c %d, ", r, cw.currentColumn)
+        if cw.currentColumn + runeWidth > cw.Width {
             cw.buf = append(cw.buf, '\n')
-            cw.currentColumn = 0
+            cw.currentColumn = runeWidth
+        } else {
+            cw.currentColumn += runeWidth
         }
 
         cw.buf = append(cw.buf, p[i:i+utf8.RuneLen(r)]...)
-        cw.currentColumn += 2
     }
+
+    fmt.Println()
 
     return len(p), err
 }
