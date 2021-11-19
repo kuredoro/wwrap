@@ -2,7 +2,6 @@ package wwrap
 
 import (
 	"io"
-    "fmt"
 	"unicode/utf8"
 
     "github.com/mattn/go-runewidth"
@@ -46,7 +45,6 @@ func (cw *CharWrapper) Write(p []byte) (n int, err error) {
 
         runeWidth := uint(runewidth.RuneWidth(r))
 
-        fmt.Printf("%c %d, ", r, cw.currentColumn)
         if cw.currentColumn + runeWidth > cw.Width {
             if cw.currentColumn != 0 && r != '\n' {
                 cw.buf = append(cw.buf, '\n')
@@ -61,8 +59,6 @@ func (cw *CharWrapper) Write(p []byte) (n int, err error) {
 
         cw.buf = append(cw.buf, p[i:i+utf8.RuneLen(r)]...)
     }
-
-    fmt.Println()
 
     return len(p), err
 }
