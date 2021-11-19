@@ -15,7 +15,7 @@ func TestCharWrapper(t *testing.T) {
         want string
     }{
         {10, "あいうえお", "あいうえお"},
-        // {10, "今日はいい天気ですね。", "今日はいい\n天気ですね\n。"},
+        {10, "今日はいい天気ですね。", "今日はいい\n天気ですね\n。"},
     }
 
     for _, test := range tests {
