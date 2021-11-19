@@ -4,6 +4,8 @@ import (
 	"io"
     "fmt"
 	"unicode/utf8"
+
+    "github.com/mattn/go-runewidth"
 )
 
 const (
@@ -42,7 +44,7 @@ func (cw *CharWrapper) Write(p []byte) (n int, err error) {
             break
         }
 
-        runeWidth := uint(2)
+        runeWidth := uint(runewidth.RuneWidth(r))
 
         fmt.Printf("%c %d, ", r, cw.currentColumn)
         if cw.currentColumn + runeWidth > cw.Width {

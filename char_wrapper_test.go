@@ -18,6 +18,7 @@ func TestCharWrapper(t *testing.T) {
         {10, "今日はいい天気ですね。", "今日はいい\n天気ですね\n。"},
         {2, "今日はいい天気ですね。", "今\n日\nは\nい\nい\n天\n気\nで\nす\nね\n。"},
         {3, "今日はいい天気ですね。", "今\n日\nは\nい\nい\n天\n気\nで\nす\nね\n。"},
+        {10, "Today is a good whether, isn't it?", "Today is a\n good whet\nher, isn't\n it?"},
     }
 
     for _, test := range tests {
