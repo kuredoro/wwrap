@@ -9,6 +9,7 @@ import (
 
 type Args struct {
     Width uint `arg:"-w,--width" default:"80" help:"the maximum column count a line would occupy"`
+    File string `arg:"positional" help:"the file to be wrapped (put nothing or - for stdin)"`
 }
 
 func (Args) Description() string {
@@ -37,10 +38,19 @@ func main() {
         os.Exit(1)
     }
 
-    err = cli.Process(os.Stdin, os.Stdout)
+    in := os.Stdin
+    if args.File != "" && args.File != "-" {
+        in, err = os.Open(args.File)
+        if err != nil {
+            fmt.Printf("error: %v\n", err)
+            os.Exit(1)
+        }
+    }
+    defer in.Close()
+
+    err = cli.Process(in, os.Stdout)
     if err != nil {
         fmt.Printf("error: %v\n", err)
         os.Exit(1)
     }
 }
-
