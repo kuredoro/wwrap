@@ -11,6 +11,18 @@ type Args struct {
     Width uint `arg:"-w,--width" default:"80" help:"the maximum column count a line would occupy"`
 }
 
+func (Args) Description() string {
+	return `Wrap unicode text not to exceed a specified column width.
+
+Author: kuredoro
+Repository: https://github.com/kuredoro/wwrap
+`
+}
+
+func (Args) Version() string {
+	return "wwrap 1.00a"
+}
+
 var args Args
 
 func main() {
