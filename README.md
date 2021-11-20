@@ -15,7 +15,7 @@ $ go install github.com/kuredoro/wwrap/cmd/wwrap@latest
 
 On Windows, if [scoop](https://scoop.sh) is installed:
 ```powershell
-> scoop bucket add 'https://github.com/kuredoro/scoop-bucket'
+> scoop bucket add kuredoro https://github.com/kuredoro/scoop-bucket
 > scoop install wwrap
 ```
 
